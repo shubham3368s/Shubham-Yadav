@@ -7,8 +7,10 @@ import React, { useState, useEffect } from 'react';
 import { BackgroundEffects } from './components/BackgroundEffects';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { TrustGuarantees } from './components/TrustGuarantees';
 import { ServiceSlider } from './components/ServiceSlider';
 import { CaseStudies } from './components/CaseStudies';
+import { StudioManifesto } from './components/StudioManifesto';
 import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
 import { FloatingToolbar } from './components/FloatingToolbar';
@@ -21,7 +23,7 @@ export default function App() {
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const [selectedServiceForInquiry, setSelectedServiceForInquiry] = useState<string>('End-to-End AI Automation');
+  const [selectedServiceForInquiry, setSelectedServiceForInquiry] = useState<string>('AI Workflows & Lead Automation');
   const [isAmbientMuted, setIsAmbientMuted] = useState(true);
   const [activeSection, setActiveSection] = useState('hero');
 
@@ -30,7 +32,7 @@ export default function App() {
   // Scroll section spy
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'services', 'work', 'ncr-hub', 'about', 'contact'];
+      const sections = ['hero', 'trust', 'services', 'work', 'ncr-hub', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -79,8 +81,8 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#050507] text-[#F5F5F5] selection:bg-fuchsia-500/30 selection:text-white overflow-x-hidden">
-      {/* 1. CINEMATIC BACKGROUND VISUAL & MEDIA ENGINE */}
+    <div className="relative min-h-screen w-full bg-[#050811] text-[#F8FAFC] selection:bg-blue-600/30 selection:text-white overflow-x-hidden">
+      {/* 1. ARCHITECTURAL PHOTOGRAPHY & CINEMATIC BACKDROP */}
       <BackgroundEffects
         currentImage={currentService.backgroundImage}
         videoSrc={currentService.videoBg || '/cinematic_hero_bg.mp4'}
@@ -88,14 +90,14 @@ export default function App() {
         isMuted={isAmbientMuted}
       />
 
-      {/* 2. MINIMALIST TOP NAVIGATION (Sticky with glass blur) */}
+      {/* 2. TOP STUDIO NAVIGATION */}
       <Navbar
         onOpenSearch={() => setIsSearchModalOpen(true)}
         onOpenInquiry={() => handleOpenInquiry()}
         activeSection={activeSection}
       />
 
-      {/* 3. HERO FULL-SCREEN SECTION (Editorial typography & carousel) */}
+      {/* 3. HERO EDITORIAL SHOWCASE */}
       <main>
         <Hero
           services={SERVICES}
@@ -105,23 +107,23 @@ export default function App() {
           onSecondaryCta={handleSecondaryHeroCta}
         />
 
-        {/* 4. SCROLLABLE EDITORIAL AGENCY CONTAINER */}
+        {/* 4. MAIN EDITORIAL CONTENT CONTAINER */}
         <div className="relative z-10 w-full max-w-[1680px] mx-auto px-4 sm:px-6 md:px-12 py-16 md:py-24 space-y-28 md:space-y-36">
-          {/* CREDENTIALS RIBBON (Tabular figures, zero pill badges) */}
-          <div className="liquid-glass rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
+          {/* CREDENTIALS RIBBON */}
+          <div className="studio-card rounded-2xl p-6 sm:p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
               {AGENCY_STATS.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="space-y-1 text-center md:text-left border-b md:border-b-0 md:border-r border-white/10 pb-4 md:pb-0 last:border-none"
+                  className="space-y-1 text-center md:text-left border-b md:border-b-0 md:border-r border-white/[0.08] pb-4 md:pb-0 last:border-none"
                 >
                   <span className="font-mono text-2xl sm:text-3xl lg:text-4xl font-normal text-white block tabular-nums">
                     {stat.value}
                   </span>
-                  <span className="text-xs font-medium text-gray-300 block">
+                  <span className="text-xs font-medium text-sky-200 block">
                     {stat.label}
                   </span>
-                  <span className="text-[11px] text-gray-400 font-light block">
+                  <span className="text-[11px] text-slate-400 font-light block">
                     {stat.context}
                   </span>
                 </div>
@@ -129,25 +131,31 @@ export default function App() {
             </div>
           </div>
 
-          {/* 5. CORE SERVICES & CAPABILITIES SHOWCASE */}
+          {/* 5. CLIENT GUARANTEES & PROMISES */}
+          <TrustGuarantees onOpenInquiry={handleOpenInquiry} />
+
+          {/* 6. WHAT WE DO (CORE SERVICES) */}
           <ServiceSlider
             services={SERVICES}
             onSelectHeroService={(idx) => setCurrentServiceIndex(idx)}
             onOpenInquiryForService={(service) => handleOpenInquiry(service.title)}
           />
 
-          {/* 6. QUANTIFIED CASE STUDIES & IMPACT */}
+          {/* 7. RECENT CLIENT WORK */}
           <CaseStudies onOpenInquiry={handleOpenInquiry} />
 
-          {/* 7. NCR SHOOT HUB, ABOUT & ON-PAGE CONTACT */}
+          {/* 8. STUDIO MANIFESTO & GEAR ROSTER (Human Story & Hardware) */}
+          <StudioManifesto />
+
+          {/* 9. ON-LOCATION NCR PRODUCTION & PROJECT BRIEF FORM */}
           <CTASection onOpenInquiry={handleOpenInquiry} />
         </div>
       </main>
 
-      {/* 8. QUIET FOOTER */}
+      {/* 10. STUDIO FOOTER */}
       <Footer />
 
-      {/* 9. FLOATING UTILITY TOOLBAR (Vertical dock on desktop / bottom pill on mobile) */}
+      {/* 11. SUBTLE CORNER CONTROLS */}
       <FloatingToolbar
         onOpenInquiry={() => handleOpenInquiry()}
         isMuted={isAmbientMuted}
@@ -155,14 +163,14 @@ export default function App() {
         activeSection={activeSection}
       />
 
-      {/* 10. CLIENT INQUIRY MODAL (Full functional validation & API integration) */}
+      {/* 12. CLIENT INQUIRY MODAL */}
       <InquiryModal
         isOpen={isInquiryModalOpen}
         onClose={() => setIsInquiryModalOpen(false)}
         initialService={selectedServiceForInquiry}
       />
 
-      {/* 11. KEYWORD SEARCH MODAL */}
+      {/* 13. SEARCH MODAL */}
       <SearchModal
         isOpen={isSearchModalOpen}
         onClose={() => setIsSearchModalOpen(false)}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, Loader2, Sparkles, MapPin, ArrowRight } from 'lucide-react';
+import { X, Check, Loader2, ShieldCheck, MapPin, ArrowRight, Lock } from 'lucide-react';
 import { submitInquiry } from '../services/contactApi';
 import { InquiryFormData } from '../types/services';
 
@@ -30,14 +30,12 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
-  // Sync initial service when opened with a specific service
   useEffect(() => {
     if (initialService) {
       setFormData((prev) => ({ ...prev, service: initialService }));
     }
   }, [initialService, isOpen]);
 
-  // Trap focus and prevent background scrolling
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -76,7 +74,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
     }
 
     if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      setErrorMsg('Please provide a valid email address.');
+      setErrorMsg('Please provide a valid business email address.');
       return;
     }
 
@@ -101,7 +99,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
           role="dialog"
           aria-modal="true"
           aria-labelledby="inquiry-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -111,14 +109,14 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-xl liquid-glass rounded-2xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/15 relative my-8"
+            className="w-full max-w-xl studio-card rounded-2xl p-6 sm:p-8 shadow-2xl relative my-8"
           >
             {/* CLOSE BUTTON */}
             <button
               type="button"
               onClick={onClose}
               aria-label="Close client hub"
-              className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-white/60"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-400"
             >
               <X className="w-5 h-5" />
             </button>
@@ -126,25 +124,30 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
             {successResult ? (
               /* SUCCESS STATE */
               <div className="py-8 text-center space-y-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
+                <div className="w-14 h-14 rounded-full bg-blue-600/20 text-sky-400 border border-sky-500/30 flex items-center justify-center mx-auto">
                   <Check className="w-7 h-7" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-xs uppercase tracking-widest text-emerald-400 font-mono">
-                    REF: {successResult.id}
+                  <span className="text-xs uppercase tracking-widest text-sky-400 font-mono">
+                    CONFIRMED TICKET: {successResult.id}
                   </span>
-                  <h3 className="text-2xl font-normal text-white">Inquiry Received</h3>
-                  <p className="text-sm text-gray-300 max-w-sm mx-auto font-light leading-relaxed">
+                  <h3 className="text-2xl font-normal text-white">Inquiry Received & Logged</h3>
+                  <p className="text-sm text-slate-300 max-w-sm mx-auto font-light leading-relaxed">
                     {successResult.message}
                   </p>
                 </div>
+
+                <div className="p-3 rounded-xl bg-sky-950/30 border border-sky-500/20 text-xs text-slate-400 font-mono max-w-sm mx-auto">
+                  Mutual NDA automatically initiated. Assigned technical producer will reach out shortly.
+                </div>
+
                 <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <button
                     type="button"
                     onClick={onClose}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white text-black text-xs font-medium hover:bg-gray-200 transition-colors cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white text-black text-xs font-medium hover:bg-slate-200 transition-colors cursor-pointer"
                   >
-                    Done
+                    Close Window
                   </button>
                 </div>
               </div>
@@ -154,24 +157,24 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
                 {/* HEADER */}
                 <div className="pb-5 border-b border-white/10 space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-fuchsia-500" />
-                    <span className="text-xs font-mono uppercase tracking-widest text-fuchsia-400">
-                      XENFORGE CLIENT HUB
+                    <ShieldCheck className="w-4 h-4 text-sky-400" />
+                    <span className="text-xs font-mono uppercase tracking-widest text-sky-400">
+                      XENFORGE CLIENT HUB & PORTAL
                     </span>
                   </div>
                   <h2 id="inquiry-title" className="text-2xl sm:text-3xl font-normal text-white tracking-tight">
-                    Start Your Project.
+                    Tell Us About Your Project.
                   </h2>
-                  <p className="text-xs sm:text-sm text-gray-400 font-light">
-                    Tell us what you&apos;re building and we&apos;ll help you plan the next step.
+                  <p className="text-xs sm:text-sm text-slate-400 font-light">
+                    Tell us what you want to build or film, and we&apos;ll send a clear scope, timeline, and quote within 24 hours.
                   </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="mt-5 space-y-4">
                   {/* FULL NAME */}
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                      Full Name <span className="text-fuchsia-400">*</span>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                      Full Name <span className="text-sky-400">*</span>
                     </label>
                     <input
                       ref={firstInputRef}
@@ -180,47 +183,47 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
                       placeholder="e.g. Vikram Malhotra"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/40"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                     />
                   </div>
 
                   {/* PHONE & EMAIL GRID */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                        Phone / WhatsApp <span className="text-fuchsia-400">*</span>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                        Phone / WhatsApp <span className="text-sky-400">*</span>
                       </label>
                       <input
                         type="tel"
                         placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/40"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                        Email Address
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                        Corporate Email Address
                       </label>
                       <input
                         type="email"
                         placeholder="you@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/40"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                       />
                     </div>
                   </div>
 
                   {/* INTERESTED SERVICE DROPDOWN */}
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                      Interested Service
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                      Interested Capability
                     </label>
                     <select
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B0710] border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/40"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#070F26] border border-sky-500/20 text-white text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                     >
                       <option value="End-to-End AI Automation">01 — AI Automation</option>
                       <option value="Bespoke Website Development">02 — Website Development</option>
@@ -234,16 +237,22 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
 
                   {/* PROJECT DETAILS */}
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                      Project Details / Shoot Requirements
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                      Project Parameters / Specifications
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="Tell us about your timeline, business goals, or preferred shoot location in NCR..."
+                      placeholder="Outline your timeline, desired outcomes, or shoot locations in NCR..."
                       value={formData.projectDetails}
                       onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/40 resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400 resize-none"
                     />
+                  </div>
+
+                  {/* CONFIDENTIALITY CLAUSE */}
+                  <div className="flex items-center gap-2 text-[11px] text-slate-400 font-mono bg-sky-950/20 p-2.5 rounded-lg border border-sky-500/15">
+                    <Lock className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                    <span>Protected by Mutual NDA. Complete IP ownership transferred to you.</span>
                   </div>
 
                   {/* ERROR MESSAGE */}
@@ -259,24 +268,24 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
 
                   {/* SUBMISSION FOOTER */}
                   <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div className="flex items-center gap-1.5 text-[11px] text-gray-400">
-                      <MapPin className="w-3.5 h-3.5 text-fuchsia-400 shrink-0" />
+                    <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+                      <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
                       <span>Gurugram HQ • Delhi NCR Hub</span>
                     </div>
 
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full sm:w-auto px-7 py-2.5 rounded-full bg-white text-black font-medium text-xs sm:text-sm hover:bg-gray-200 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                      className="w-full sm:w-auto px-7 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs sm:text-sm active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-[0_2px_14px_rgba(37,99,235,0.35)]"
                     >
                       {loading ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>Submitting...</span>
+                          <span>Processing...</span>
                         </>
                       ) : (
                         <>
-                          <span>Submit Inquiry</span>
+                          <span>Send Inquiry</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </>
                       )}

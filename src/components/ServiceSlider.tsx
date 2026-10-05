@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ServiceItem } from '../types/services';
 import { ServiceCard } from './ServiceCard';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
 
 interface ServiceSliderProps {
   services: ServiceItem[];
@@ -27,27 +26,27 @@ export const ServiceSlider: React.FC<ServiceSliderProps> = ({
   return (
     <section id="services" className="scroll-mt-24 space-y-10">
       {/* SECTION HEADER */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-white/10">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-sky-500/15">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-fuchsia-400 uppercase mb-2">
-            <span>02</span>
-            <span className="text-white/40">/</span>
-            <span>CORE CAPABILITIES</span>
+          <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-sky-400 uppercase mb-2">
+            <span>03</span>
+            <span className="text-sky-500/40">/</span>
+            <span>WHAT WE DO</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F5F5F5] text-balance">
-            Architected for Exponential Impact.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F8FAFC] text-balance">
+            Our Core Services.
           </h2>
         </div>
 
-        <p className="text-xs sm:text-sm text-[#A1A1AA] max-w-md font-light leading-relaxed">
-          Six multidisciplinary practices unified by engineering rigor, cinematic aesthetics, and relentless revenue focus.
+        <p className="text-xs sm:text-sm text-slate-300 max-w-md font-light leading-relaxed">
+          Six focused services covering web development, mobile apps, AI automations, video editing, and paid marketing.
         </p>
       </div>
 
       {/* SEGMENTED FILTER CONTROLS */}
       <div className="flex flex-wrap items-center gap-2">
         {[
-          { id: 'all', label: 'All Services (06)' },
+          { id: 'all', label: 'All Capabilities (06)' },
           { id: 'ai', label: 'AI Automation' },
           { id: 'dev', label: 'Web & Mobile Engineering' },
           { id: 'media', label: 'Video, Shoots & Paid Growth' },
@@ -58,8 +57,8 @@ export const ServiceSlider: React.FC<ServiceSliderProps> = ({
             onClick={() => setActiveFilter(tab.id as typeof activeFilter)}
             className={`px-4 py-2 rounded-full text-xs font-medium transition-all cursor-pointer ${
               activeFilter === tab.id
-                ? 'bg-white text-black shadow-md'
-                : 'liquid-glass text-gray-400 hover:text-white hover:bg-white/[0.04]'
+                ? 'bg-blue-600 text-white shadow-[0_2px_14px_rgba(37,99,235,0.35)] border border-sky-400/30'
+                : 'liquid-glass text-slate-300 hover:text-white hover:border-sky-400/30'
             }`}
           >
             {tab.label}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Camera, MapPin, Check, Loader2, ArrowRight, Phone, MessageSquare, Mail, Sparkles } from 'lucide-react';
+import { Camera, MapPin, Check, Loader2, ArrowRight, MessageSquare, ShieldCheck, Lock } from 'lucide-react';
 import { submitInquiry } from '../services/contactApi';
 import { InquiryFormData } from '../types/services';
 
@@ -29,7 +29,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
       return;
     }
     if (!formData.phone.trim() && !formData.email.trim()) {
-      setErrorMsg('Please enter either a phone or email address.');
+      setErrorMsg('Please enter either a phone number or email address.');
       return;
     }
 
@@ -50,38 +50,38 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
           ON-GROUND GURUGRAM & DELHI NCR PRODUCTION HUB
           ======================================================== */}
       <section id="ncr-hub" className="scroll-mt-24 space-y-6">
-        <div className="liquid-glass rounded-2xl p-8 sm:p-12 border border-fuchsia-500/25 bg-fuchsia-950/10 relative overflow-hidden">
+        <div className="studio-card rounded-2xl p-8 sm:p-12 relative overflow-hidden">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-fuchsia-400">
-              <MapPin className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-sky-400">
+              <MapPin className="w-3.5 h-3.5 text-sky-400" />
               <span>ON-GROUND STUDIO INFRASTRUCTURE</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F5F5F5] text-balance">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F8FAFC] text-balance">
               On-Location Video & Photo Shoots across Gurugram & Delhi NCR.
             </h2>
 
-            <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
-              We bring full 4K cinema packages (Sony FX cameras, motorized gimbal rigs, multi-channel wireless audio, and professional studio lighting) directly to your corporate premises, retail stores, or event venues.
+            <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+              We bring full 4K cinema packages (Sony FX cameras, motorized gimbal rigs, multi-channel wireless audio, and professional studio lighting) directly to your corporate premises, retail stores, or event venues with on-site backup and insured gear.
             </p>
 
             {/* COVERAGE DISTRICTS */}
             <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
                 <span className="text-white font-medium block">DLF Cyber City</span>
-                <span className="text-gray-400 text-[11px]">Corporate & Commercial</span>
+                <span className="text-slate-400 text-[11px]">Corporate & Commercial</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
                 <span className="text-white font-medium block">Golf Course Road</span>
-                <span className="text-gray-400 text-[11px]">Luxury Real Estate & Lifestyle</span>
+                <span className="text-slate-400 text-[11px]">Luxury Real Estate & Lifestyle</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
                 <span className="text-white font-medium block">South & Central Delhi</span>
-                <span className="text-gray-400 text-[11px]">Brand Films & Fashion</span>
+                <span className="text-slate-400 text-[11px]">Brand Films & Documentaries</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
                 <span className="text-white font-medium block">Noida Expressways</span>
-                <span className="text-gray-400 text-[11px]">Tech Hubs & Industrial</span>
+                <span className="text-slate-400 text-[11px]">Tech Hubs & Industrial</span>
               </div>
             </div>
 
@@ -89,7 +89,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
               <button
                 type="button"
                 onClick={() => onOpenInquiry('Gurugram & Delhi NCR On-Location Shoot')}
-                className="px-6 py-2.5 rounded-full bg-white text-black font-medium text-xs sm:text-sm hover:bg-gray-200 transition-colors cursor-pointer flex items-center gap-2"
+                className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs sm:text-sm transition-all cursor-pointer flex items-center gap-2 shadow-[0_2px_16px_rgba(37,99,235,0.35)]"
               >
                 <Camera className="w-4 h-4" />
                 <span>Schedule On-Location Shoot</span>
@@ -99,58 +99,12 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
                 href="https://wa.me/919876543210?text=Hi%20Xenforge%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20shoot%20or%20project."
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-2.5 rounded-full liquid-glass text-white font-medium text-xs sm:text-sm hover:text-gray-200 transition-colors flex items-center gap-2"
+                className="px-6 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-white font-medium text-xs sm:text-sm transition-colors flex items-center gap-2"
               >
-                <MessageSquare className="w-4 h-4 text-emerald-400" />
+                <MessageSquare className="w-4 h-4 text-sky-400" />
                 <span>WhatsApp Instant Connect</span>
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================
-          ABOUT XENFORGE SECTION
-          ======================================================== */}
-      <section id="about" className="scroll-mt-24 space-y-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-white/10">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-fuchsia-400 uppercase mb-2">
-              <span>04</span>
-              <span className="text-white/40">/</span>
-              <span>ABOUT XENFORGE</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F5F5F5]">
-              Human Vision. Machine Velocity.
-            </h2>
-          </div>
-
-          <p className="text-xs sm:text-sm text-[#A1A1AA] max-w-md font-light leading-relaxed">
-            We operate at the convergence of creative direction, software architecture, and artificial intelligence.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="liquid-glass rounded-2xl p-7 border border-white/10 space-y-3">
-            <span className="text-xs font-mono text-fuchsia-400 uppercase">PRINCIPLE 01</span>
-            <h3 className="text-xl font-normal text-white">Zero Mediocrity</h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              We reject generic templates, lazy AI boilerplate, and uninspired design. Every line of code and frame of footage is intentionally crafted.
-            </p>
-          </div>
-          <div className="liquid-glass rounded-2xl p-7 border border-white/10 space-y-3">
-            <span className="text-xs font-mono text-purple-400 uppercase">PRINCIPLE 02</span>
-            <h3 className="text-xl font-normal text-white">Full-Funnel Ownership</h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              From creative shoot production to backend cloud systems and paid Meta ad distribution, we own the complete pipeline from click to conversion.
-            </p>
-          </div>
-          <div className="liquid-glass rounded-2xl p-7 border border-white/10 space-y-3">
-            <span className="text-xs font-mono text-emerald-400 uppercase">PRINCIPLE 03</span>
-            <h3 className="text-xl font-normal text-white">Autonomous Scaling</h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              We embed bespoke AI automation workflows into client businesses so their operational throughput scales effortlessly without bloat.
-            </p>
           </div>
         </div>
       </section>
@@ -160,36 +114,36 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
           ======================================================== */}
       <section id="contact" className="scroll-mt-24 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="flex items-center justify-center gap-2 text-xs font-mono tracking-widest text-fuchsia-400 uppercase">
+          <div className="flex items-center justify-center gap-2 text-xs font-mono tracking-widest text-sky-400 uppercase">
             <span>05</span>
-            <span className="text-white/40">/</span>
-            <span>GET IN TOUCH</span>
+            <span className="text-sky-500/40">/</span>
+            <span>CONTACT US</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F5F5F5] text-balance">
-            Let&apos;s Build What Comes Next.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-[-0.03em] text-[#F8FAFC] text-balance">
+            Tell Us About Your Project.
           </h2>
-          <p className="text-xs sm:text-sm text-[#A1A1AA] font-light">
-            Share your project parameters and receive a structured architectural proposal or shoot date within 24 hours.
+          <p className="text-xs sm:text-sm text-slate-300 font-light">
+            Send us a note about what you need built, filmed, or automated. We&apos;ll reply within 24 hours with a scope and fixed quote.
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto liquid-glass rounded-2xl p-6 sm:p-9 border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
+        <div className="max-w-2xl mx-auto studio-card rounded-2xl p-6 sm:p-9 shadow-2xl">
           {submittedRef ? (
             <div className="py-8 text-center space-y-4">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
+              <div className="w-14 h-14 rounded-full bg-blue-600/20 text-sky-400 border border-sky-500/30 flex items-center justify-center mx-auto">
                 <Check className="w-7 h-7" />
               </div>
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400">
+              <span className="text-xs font-mono uppercase tracking-widest text-sky-400">
                 PROPOSAL TICKET: {submittedRef}
               </span>
               <h3 className="text-2xl font-normal text-white">Inquiry Successfully Dispatched</h3>
-              <p className="text-xs sm:text-sm text-gray-300 max-w-sm mx-auto font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto font-light leading-relaxed">
                 Thank you! Our technical producer will contact you via WhatsApp / Phone to schedule a discovery session.
               </p>
               <button
                 type="button"
                 onClick={() => setSubmittedRef(null)}
-                className="mt-4 px-6 py-2 rounded-full liquid-glass text-xs font-medium text-white hover:text-gray-200 transition-colors cursor-pointer"
+                className="mt-4 px-6 py-2 rounded-full liquid-glass text-xs font-medium text-white hover:text-sky-200 transition-colors cursor-pointer"
               >
                 Submit Additional Brief
               </button>
@@ -198,53 +152,53 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                    Your Name <span className="text-fuchsia-400">*</span>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                    Your Name <span className="text-sky-400">*</span>
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Ananya Sen"
+                    placeholder="e.g. Vikram Malhotra"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                    Phone / WhatsApp <span className="text-fuchsia-400">*</span>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                    Phone / WhatsApp <span className="text-sky-400">*</span>
                   </label>
                   <input
                     type="tel"
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
-                    Email Address
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
+                    Work Email Address
                   </label>
                   <input
                     type="email"
                     placeholder="contact@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
                     Primary Practice
                   </label>
                   <select
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B0710] border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-white/40"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#070F26] border border-sky-500/20 text-white text-xs sm:text-sm focus:outline-none focus:border-sky-400"
                   >
                     <option value="End-to-End AI Automation">01 — AI Automation</option>
                     <option value="Bespoke Website Development">02 — Website Development</option>
@@ -258,7 +212,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
               </div>
 
               <div>
-                <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1 font-medium">
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 font-medium">
                   Project Scope / Shoot Details
                 </label>
                 <textarea
@@ -266,8 +220,14 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
                   placeholder="Outline your project timeline, tech requirements, or NCR shoot dates..."
                   value={formData.projectDetails}
                   onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-white/40 resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-sky-500/20 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-sky-400 resize-none"
                 />
+              </div>
+
+              {/* Confidentiality Guarantee Notice */}
+              <div className="flex items-center gap-2 text-[11px] text-slate-400 font-mono bg-sky-950/20 p-2.5 rounded-lg border border-sky-500/15">
+                <Lock className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <span>We sign a mutual NDA before reviewing any confidential documents or numbers.</span>
               </div>
 
               {errorMsg && (
@@ -277,15 +237,15 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
               )}
 
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-[11px] text-gray-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span>Available for Q2 / Q3 2026 Deployments</span>
+                <div className="flex items-center gap-2 text-[11px] text-slate-400">
+                  <ShieldCheck className="w-4 h-4 text-sky-400" />
+                  <span>Open for new client projects this month</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full sm:w-auto px-7 py-2.5 rounded-full bg-white text-black font-medium text-xs sm:text-sm hover:bg-gray-200 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                  className="w-full sm:w-auto px-7 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs sm:text-sm active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-[0_2px_14px_rgba(37,99,235,0.35)]"
                 >
                   {loading ? (
                     <>
@@ -294,7 +254,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ onOpenInquiry }) => {
                     </>
                   ) : (
                     <>
-                      <span>Submit Inquiry</span>
+                      <span>Send Project Brief</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </>
                   )}
