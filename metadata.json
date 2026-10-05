@@ -1,0 +1,6 @@
+{
+  "name": "Cinematic - Step Through",
+  "description": "Full-viewport cinematic movie streaming hero experience with liquid glass interface and ambient visuals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
